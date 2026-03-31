@@ -2,7 +2,7 @@ import { startTransition, useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import SlideContent from './components/SlideContent'
 import ThemeToggle from './ThemeToggle'
-import { NOTE_KEY, quickLinks, slides } from './deckData'
+import { NOTE_KEY, mockStudents, quickLinks, slides } from './deckData'
 
 const THEME_KEY = 'daily-activities-choice-board-theme'
 
@@ -92,6 +92,10 @@ export default function App() {
               <strong>
                 {currentIndex + 1} / {slides.length}
               </strong>
+            </div>
+            <div className="meta-card">
+              <span>Loaded records</span>
+              <strong>{mockStudents.length} students</strong>
             </div>
             <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
           </div>

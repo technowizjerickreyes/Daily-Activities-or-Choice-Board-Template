@@ -1,5 +1,13 @@
 import { BOARD_SLIDE_ID, REVIEW_SLIDE_ID } from '../deckData'
 
+function ModePill({ modeLabel, playMode }) {
+  return <span className={`mode-pill mode-pill--${playMode}`}>{modeLabel}</span>
+}
+
+function SummaryTag({ children }) {
+  return <span className="summary-tag">{children}</span>
+}
+
 function IntroSlide({ slide, onOpen }) {
   return (
     <section className="hero-slide">
@@ -43,6 +51,10 @@ function ChoiceBoardSlide({ slide, onOpen }) {
         <p className="section-heading__eyebrow">Choice Board</p>
         <h2>{slide.title}</h2>
         <p>{slide.description}</p>
+        <div className="summary-tags">
+          <SummaryTag>{slide.items.length} activities</SummaryTag>
+          <SummaryTag>Student activity list</SummaryTag>
+        </div>
       </div>
 
       <div className="board-grid">
@@ -58,8 +70,17 @@ function ChoiceBoardSlide({ slide, onOpen }) {
               <span className="activity-card__icon">{item.icon}</span>
               <span className="activity-card__number">0{item.number}</span>
             </div>
+
+            <div className="activity-card__meta-row">
+              <ModePill modeLabel={item.modeLabel} playMode={item.playMode} />
+              <span className="activity-card__count">
+                {item.assignedCount} {item.assignedCount === 1 ? 'student' : 'students'}
+              </span>
+            </div>
+
             <strong>{item.label}</strong>
             <p>{item.headline}</p>
+            <p className="activity-card__mode-copy">{item.modeDescription}</p>
             <span className="activity-card__link">Open activity</span>
           </button>
         ))}
@@ -81,6 +102,13 @@ function ActivitySlide({ slide, onOpen }) {
           <p className="section-heading__eyebrow">{slide.title}</p>
           <h2>{slide.headline}</h2>
           <p>{slide.summary}</p>
+
+          <div className="summary-tags">
+            <ModePill modeLabel={slide.modeLabel} playMode={slide.playMode} />
+            <SummaryTag>
+              {slide.playMode === 'single-player' ? 'Independent task flow' : 'Pair or small-group flow'}
+            </SummaryTag>
+          </div>
         </div>
 
         <button className="secondary-button" onClick={() => onOpen(BOARD_SLIDE_ID)} type="button">
@@ -89,21 +117,39 @@ function ActivitySlide({ slide, onOpen }) {
       </div>
 
       <div className="activity-slide__layout">
-        <article className="activity-panel">
-          <div className="panel-heading">
-            <span>Instructions</span>
-            <strong>What to do</strong>
-          </div>
+        <div className="activity-mainstack">
+          <article className="activity-panel">
+            <div className="panel-heading">
+              <span>Instructions</span>
+              <strong>What to do</strong>
+            </div>
 
-          <div className="steps-list">
-            {slide.content.map((item, index) => (
-              <div key={`${slide.id}-${index}`} className="step-item">
-                <span className="step-item__number">0{index + 1}</span>
-                <p>{item}</p>
-              </div>
-            ))}
-          </div>
-        </article>
+            <div className="steps-list">
+              {slide.content.map((item, index) => (
+                <div key={`${slide.id}-${index}`} className="step-item">
+                  <span className="step-item__number">0{index + 1}</span>
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+          </article>
+
+          <article className="activity-panel">
+            <div className="panel-heading">
+              <span>Mini Tutorial</span>
+              <strong>Quick play guide</strong>
+            </div>
+
+            <div className="tutorial-list">
+              {slide.miniTutorial.map((item, index) => (
+                <div key={`${slide.slug}-tutorial-${index}`} className="tutorial-item">
+                  <span className="tutorial-item__number">{index + 1}</span>
+                  <p>{item}</p>
+                </div>
+              ))}
+            </div>
+          </article>
+        </div>
 
         <aside className="activity-sidecard">
           <div className="activity-sidecard__visual">
@@ -111,6 +157,11 @@ function ActivitySlide({ slide, onOpen }) {
           </div>
 
           <div className="activity-sidecard__meta">
+            <div>
+              <span>Mode</span>
+              <strong>{slide.modeLabel}</strong>
+              <p className="activity-sidecard__detail">{slide.modeDescription}</p>
+            </div>
             <div>
               <span>Focus</span>
               <strong>{slide.focus}</strong>
@@ -137,6 +188,9 @@ function ReviewSlide({ slide, onOpen }) {
         <p className="section-heading__eyebrow">Reflection</p>
         <h2>{slide.title}</h2>
         <p>{slide.description}</p>
+        <div className="summary-tags summary-tags--center">
+          <SummaryTag>{slide.count} student records</SummaryTag>
+        </div>
       </div>
 
       <div className="review-grid">
@@ -148,9 +202,16 @@ function ReviewSlide({ slide, onOpen }) {
             style={{ '--student-accent': student.accent }}
             type="button"
           >
-            <span className="student-link-card__label">Open reflection</span>
+            <span className="student-link-card__label">Student reflection</span>
             <strong>{student.label}</strong>
+            <p className="student-link-card__meta">{student.section}</p>
             <p className="student-link-card__preview">{student.preview}</p>
+            <p className="student-link-card__assignment">{student.assignedActivityTitle}</p>
+
+            <div className="student-link-card__footer">
+              <ModePill modeLabel={student.modeLabel} playMode={student.playMode} />
+              <span className="student-link-card__status">{student.status}</span>
+            </div>
           </button>
         ))}
       </div>
@@ -168,6 +229,11 @@ function StudentSlide({ slide, note, onNote, onOpen }) {
           <p className="section-heading__eyebrow">Reflection Journal</p>
           <h2>{slide.title}</h2>
           <p>{slide.prompt}</p>
+
+          <div className="summary-tags">
+            <SummaryTag>{slide.section}</SummaryTag>
+            <ModePill modeLabel={slide.modeLabel} playMode={slide.playMode} />
+          </div>
         </div>
 
         <div className="student-slide__actions">
@@ -182,6 +248,21 @@ function StudentSlide({ slide, note, onNote, onOpen }) {
       </div>
 
       <article className="reflection-panel">
+        <div className="student-overview">
+          <div className="student-overview__item">
+            <span>Assigned task</span>
+            <strong>{slide.assignedActivityTitle}</strong>
+          </div>
+          <div className="student-overview__item">
+            <span>Status</span>
+            <strong>{slide.status}</strong>
+          </div>
+          <div className="student-overview__item">
+            <span>Mini goal</span>
+            <strong>{slide.goal}</strong>
+          </div>
+        </div>
+
         <label className="reflection-panel__label" htmlFor={`reflection-${slide.id}`}>
           Share your ideas clearly and use complete sentences.
         </label>

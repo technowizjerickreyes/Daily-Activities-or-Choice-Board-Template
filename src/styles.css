@@ -118,6 +118,7 @@ textarea:focus-visible {
   margin-inline: auto;
   background: var(--shell-bg);
   box-shadow: var(--shadow-lg);
+  -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
 }
 
@@ -465,6 +466,45 @@ textarea:focus-visible {
   margin-bottom: 24px;
 }
 
+.summary-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.summary-tags--center {
+  justify-content: center;
+}
+
+.summary-tag,
+.mode-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.summary-tag {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text);
+}
+
+.mode-pill--single-player {
+  background: rgba(143, 198, 63, 0.14);
+  color: #4e7b14;
+}
+
+.mode-pill--multiplayer {
+  background: rgba(91, 151, 221, 0.14);
+  color: #245994;
+}
+
 .section-heading--center {
   margin-inline: auto;
   text-align: center;
@@ -554,6 +594,26 @@ textarea:focus-visible {
   line-height: 1.6;
 }
 
+.activity-card__meta-row,
+.student-link-card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.activity-card__count,
+.student-link-card__meta,
+.student-link-card__status {
+  color: var(--text-soft);
+  font-size: 0.88rem;
+}
+
+.activity-card__mode-copy,
+.student-link-card__assignment {
+  font-size: 0.94rem;
+}
+
 .activity-card__link {
   display: inline-flex;
   align-items: center;
@@ -593,6 +653,13 @@ textarea:focus-visible {
 }
 
 .activity-slide__layout {
+  display: grid;
+  gap: 18px;
+}
+
+.activity-mainstack,
+.tutorial-list,
+.student-overview {
   display: grid;
   gap: 18px;
 }
@@ -656,6 +723,30 @@ textarea:focus-visible {
   margin: 0;
 }
 
+.tutorial-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.tutorial-item__number {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--activity-accent) 18%, white);
+  color: color-mix(in srgb, var(--activity-accent) 78%, black);
+  font-weight: 800;
+}
+
+.tutorial-item p {
+  margin: 0;
+  color: var(--text-soft);
+  line-height: 1.65;
+}
+
 .activity-sidecard {
   display: grid;
   gap: 16px;
@@ -698,6 +789,13 @@ textarea:focus-visible {
   color: var(--text);
 }
 
+.activity-sidecard__detail {
+  margin: 8px 0 0;
+  color: var(--text-soft);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
 .review-grid {
   grid-template-columns: 1fr;
 }
@@ -728,6 +826,15 @@ textarea:focus-visible {
   margin: 0;
   color: var(--text-soft);
   line-height: 1.55;
+}
+
+.student-link-card__meta,
+.student-link-card__assignment {
+  margin: 0;
+}
+
+.student-link-card__footer {
+  margin-top: auto;
 }
 
 .student-slide {
@@ -763,6 +870,31 @@ textarea:focus-visible {
   margin-bottom: 12px;
 }
 
+.student-overview {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-bottom: 16px;
+}
+
+.student-overview__item {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--student-accent) 10%, white);
+}
+
+.student-overview__item span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.76rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.student-overview__item strong {
+  color: var(--text);
+  line-height: 1.45;
+}
+
 .reflection-panel textarea {
   width: 100%;
   min-height: 320px;
@@ -782,7 +914,7 @@ textarea:focus-visible {
   }
 
   .topbar__meta {
-    grid-template-columns: repeat(2, minmax(140px, 180px));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 180px));
     justify-content: end;
   }
 

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "stu-001",
+    "name": "Ariana Santos",
+    "section": "Grade 5 - Diamond",
+    "activitySlug": "reading-warm-up",
+    "status": "Ready for independent work",
+    "goal": "Finish one complete-sentence response",
+    "reflectionStarter": "I understood the message because..."
+  },
+  {
+    "id": "stu-002",
+    "name": "Miguel Reyes",
+    "section": "Grade 5 - Diamond",
+    "activitySlug": "creative-sketch",
+    "status": "Waiting for teacher check",
+    "goal": "Add labels to the sketch",
+    "reflectionStarter": "My drawing shows the lesson by..."
+  },
+  {
+    "id": "stu-003",
+    "name": "Leah Cruz",
+    "section": "Grade 5 - Emerald",
+    "activitySlug": "math-challenge",
+    "status": "Working with a partner",
+    "goal": "Explain the strategy out loud",
+    "reflectionStarter": "The math strategy that helped me was..."
+  },
+  {
+    "id": "stu-004",
+    "name": "Noah Garcia",
+    "section": "Grade 5 - Emerald",
+    "activitySlug": "word-work",
+    "status": "Pair practice in progress",
+    "goal": "Use one new word in context",
+    "reflectionStarter": "A new word I can use now is..."
+  },
+  {
+    "id": "stu-005",
+    "name": "Sofia Mendoza",
+    "section": "Grade 5 - Ruby",
+    "activitySlug": "writing-time",
+    "status": "Drafting response",
+    "goal": "Write three clear sentences",
+    "reflectionStarter": "My main idea became clearer when..."
+  },
+  {
+    "id": "stu-006",
+    "name": "Ethan Flores",
+    "section": "Grade 5 - Ruby",
+    "activitySlug": "exit-ticket",
+    "status": "Needs a quick review",
+    "goal": "Share one takeaway and one next step",
+    "reflectionStarter": "One thing I learned today was..."
+  }
+]
